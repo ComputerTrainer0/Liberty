@@ -1,0 +1,23 @@
+#Features Needed
+
+        <feature>adminCenter-1.0</feature>
+        <feature>websocket-1.1</feature>
+
+
+#Username and Group Creation
+
+        <user name="wlpadm" password="wlpadm"/>
+        <group name="admin">
+           <member name="wlpadm" />
+        </group>
+
+
+#Roles Needed
+
+    <administrator-role>
+       <user>wlpadm</user>
+    </administrator-role>
+
+    <reader-role>
+       <user>reader</user>
+    </reader-role>
