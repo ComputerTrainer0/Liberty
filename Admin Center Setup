@@ -18,6 +18,7 @@
        <user>wlpadm</user>
     </administrator-role>
 
+#home work. create a group called dev add a user into it and access with the reader role.
     <reader-role>
-       <user>reader</user>
+       <group>reader</group>
     </reader-role>
