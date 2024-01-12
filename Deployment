@@ -1,0 +1,12 @@
+<application id="httpSession" name="httpSession" type="war" location="/opt/software/EAR/httpSession.war" />
+
+## needed for ear deployment
+<feature>webProfile-8.0</feature>
+
+<enterpriseApplication id="dizzyworld" name="dizzyworld" location="/opt/software/EAR/dizzyworld.ear" />
+<enterpriseApplication id="chart" name="chart" location="/opt/software/EAR/Library_chart.ear" />
+
+
+
+
+
