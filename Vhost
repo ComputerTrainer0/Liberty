@@ -1,0 +1,58 @@
+
+Simple Vhost:
+
+    <application id="httpSession" name="httpSession" type="war" location="/opt/software/EAR/httpSession.war" contextRoot="/httpSession">
+      <web-bnd name="httpSession">
+        <virtual-host name="default_host"/>
+      </web-bnd>
+    </application>
+
+    <enterpriseApplication id="chart" name="chart" location="/opt/software/EAR/Library_chart.ear">
+      <web-ext moduleName="Samples" context-root="Samples" />
+        <web-bnd moduleName="Samples">
+          <virtual-host name="default_host"/>
+        </web-bnd>
+    </enterpriseApplication>
+
+    <virtualHost id="default_host" name="default_host" enable="true" allowFromEndpointRef="defaultHttpEndpoint">
+    <hostAlias>*:9080</hostAlias>
+    <hostAlias>*:9443</hostAlias>
+    </virtualHost>
+
+    <httpEndpoint id="defaultHttpEndpoint" httpPort="9080" httpsPort="9443" virtualHost="default_host" sslRef="defaultSSLConfig" host="was-host1" />
+
+Complex:
+
+    <application id="httpSession" name="httpSession" type="war" location="/opt/software/EAR/httpSession.war" contextRoot="/httpSession">
+      <web-bnd name="httpSession">
+        <virtual-host name="app1Host"/>
+      </web-bnd>
+    </application>
+
+    <enterpriseApplication id="chart" name="chart" location="/opt/software/EAR/Library_chart.ear">
+      <web-ext moduleName="Samples" context-root="Samples" />
+        <web-bnd moduleName="Samples">
+          <virtual-host name="app2Host"/>
+        </web-bnd>
+    </enterpriseApplication>
+
+
+    <virtualHost id="default_host" name="default_host" enable="true" allowFromEndpointRef="defaultHttpEndpoint">
+    <hostAlias>*:9080</hostAlias>
+    <hostAlias>*:9443</hostAlias>
+    </virtualHost>
+
+    <virtualHost id="app1Host" name="app1Host" enable="true" allowFromEndpointRef="app1HttpEndpoint">
+    <hostAlias>*:8081</hostAlias>
+    <hostAlias>*:9444</hostAlias>
+    </virtualHost>
+    <virtualHost id="app2Host" name="app2Host" enable="true" allowFromEndpointRef="app2HttpEndpoint">
+    <hostAlias>*:8082</hostAlias>
+    <hostAlias>*:9445</hostAlias>
+    </virtualHost>
+
+
+
+    <httpEndpoint id="defaultHttpEndpoint" httpPort="9080" httpsPort="9443" sslRef="defaultSSLConfig" host="was-host1" />
+    <httpEndpoint id="app1HttpEndpoint" httpPort="8081" httpsPort="9444" virtualHost="app1Host" host="www.httpSession.com"/>
+    <httpEndpoint id="app2HttpEndpoint" httpPort="8082" httpsPort="9445" virtualHost="app2Host" host="www.chart.com"/>
