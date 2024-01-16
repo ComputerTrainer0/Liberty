@@ -1,0 +1,69 @@
+optional (if you have packages):
+
+./installUtility install collectiveController-1.0 collectiveMember-1.0 clusterMember-1.0 websocket-1.1 restConnector-2.0 ssl-1.0 localConnector-1.0 adminCenter-1.0
+
+Create three installation of WLP 
+
+cp -rf wlp/ /opt/IBM/wlp_ctrl/
+cp -rf wlp/ /opt/IBM/wlp_cls1/
+cp -rf wlp/ /opt/IBM/wlp_cls2/
+
+
+In Controller Bin/
+
+./server create wlpctrl
+
+Create Controller configuration file using the following command:
+
+./collective create wlpctrl --keystorePassword=P@ssw0rd --createConfigFile=/opt/IBM/wlp_ctrl/usr/servers/wlpctrl/wlpctrl_include.xml
+
+Append the following code on server.xml
+
+<include location="${server.config.dir}/wlpctrl_include.xml" />
+
+Add Host as part of the httpendpoint
+host="*"
+
+Also add the following Feature
+
+      <feature>adminCenter-1.0</feature>
+      <feature>websocket-1.1</feature>
+      <feature>restConnector-1.0</feature>
+      <feature>localConnector-1.0</feature>
+
+
+To Join to the controller
+ ./collective join wlpsvr1 \
+  --host=was-host1 \
+  --port=9443 \
+  --user=wlpadm \
+  --password=wlpadm \
+  --keystorePassword=P@ssw0rd \
+  --createConfigFile=/opt/IBM/wlp_cls1/usr/servers/wlpsvr1/wlpsvr1_include.xml
+
+
+Update the wlpsvr1_include.xml
+
+  <feature>clusterMember-1.0</feature>
+
+<clusterMember name="wlpCluster"/>
+
+  <remoteFileAccess>
+     <writeDir>${server.config.dir}</writeDir>
+  </remoteFileAccess>
+
+
+
+Include in Server.xml
+
+  <feature>webProfile-7.0</feature>
+  <feature>restConnector-1.0</feature>
+  <feature>localConnector-1.0</feature>
+
+<include location="${server.config.dir}/wlpsvr1_include.xml" />
+
+ <httpEndpoint id="defaultHttpEndpoint"
+  httpPort="9081"
+  httpsPort="9444" host="*"/>
+
+ <!-- <applicationManager autoExpand="true"/> -->
