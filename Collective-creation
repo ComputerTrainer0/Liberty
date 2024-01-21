@@ -32,12 +32,17 @@ Also add the following Feature
       <feature>localConnector-1.0</feature>
 
 
+export JAVA_HOME=/opt/java/
+
+./server create wlpsvr1
+
+
 To Join to the controller
  ./collective join wlpsvr1 \
   --host=was-host1 \
   --port=9443 \
-  --user=wlpadm \
-  --password=wlpadm \
+  --user=admin \
+  --password=admin \
   --keystorePassword=P@ssw0rd \
   --createConfigFile=/opt/IBM/wlp_cls1/usr/servers/wlpsvr1/wlpsvr1_include.xml
 
