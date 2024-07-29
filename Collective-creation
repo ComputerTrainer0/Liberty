@@ -11,11 +11,11 @@ cp -rf wlp/ /opt/IBM/wlp_cls2/
 
 In Controller Bin/
 
-./server create wlpctrl
+./server create wlp-controller
 
 Create Controller configuration file using the following command:
 
-./collective create wlpctrl --keystorePassword=P@ssw0rd --createConfigFile=/opt/IBM/wlp_ctrl/usr/servers/wlpctrl/wlpctrl_include.xml
+./collective create wlp-controller --keystorePassword=P@ssw0rd --createConfigFile=/opt/IBM/wlp-controller/usr/servers/wlp-controller/wlpctrl_include.xml
 
 Append the following code on server.xml
 
