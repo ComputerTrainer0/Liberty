@@ -8,15 +8,15 @@ https://www.jython.org/download
 
 Create a file named deploy.sh Add the below content:
 
-  #! /bin/bash
-  export JYTHONPATH=/opt/IBM/wlp_ctrl/clients/jython/restConnector.py
-  java -cp /opt/jython/jython.jar:/opt/IBM/wlp_ctrl/clients/restConnector.jar:/opt/IBM/wlp_ctrl/clients/jython/:/opt/deploy/lib/ org.python.util.jython "$@"
+#! /bin/bash
+export JYTHONPATH=/opt/IBM/wlp-controller/clients/jython/restConnector.py
+java -cp /opt/jython/jython.jar:/opt/IBM/wlp-controller/clients/restConnector.jar:/opt/IBM/wlp-controller/clients/jython/:/opt/deploy/lib/ org.python.util.jython "$@"
 
 Copy the trust store
-cp /opt/IBM/wlp_ctrl/usr/servers/wlpctrl/resources/security/trust.p12 /opt/deploy/
+cp /opt/IBM/wlp-controller/usr/servers/wlpctrl/resources/security/trust.p12 /opt/deploy/
 
 To Install a package
-  ./deploy.sh manageAppOnCluster.py --install=/opt/software/EAR/Samples.war --truststore=/opt/deploy/trust.p12 --truststorePassword=P@ssw0rd --host=was-host1 --port=9443 --user=wlpadm --password=wlpadm --clusterName=wlpCluster
+  ./deploy.sh deployment.py --install=/opt/software/EAR/Samples.war --truststore=/opt/deploy/trust.p12 --truststorePassword=P@ssw0rd --host=was-host1 --port=9443 --user=wlpadm --password=wlpadm --clusterName=wlpCluster
 
 To Uninstall:
-  ./deploy.sh manageAppOnCluster.py --uninstall=Samples.war --truststore=/opt/deploy/trust.p12 --truststorePassword=P@ssw0rd --host=was-host1 --port=9443 --user=wlpadm --password=wlpadm --clusterName=wlpCluster
+  ./deploy.sh deployment.py --uninstall=Samples.war --truststore=/opt/deploy/trust.p12 --truststorePassword=P@ssw0rd --host=was-host1 --port=9443 --user=wlpadm --password=wlpadm --clusterName=wlpCluster
