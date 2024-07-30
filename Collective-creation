@@ -32,13 +32,29 @@ Also add the following Feature
       <feature>localConnector-1.0</feature>
 
 
+#For User and pasword configuration:
+
+
+#Username and Group Creation
+    <basicRegistry id="basic" realm="BasicRealm">
+        <user name="wlpadm" password="wlpadm"/>
+        <group name="admin">
+           <member name="wlpadm" />
+        </group>
+    </basicRegistry>
+#Roles Needed
+    <administrator-role>
+       <user>wlpadm</user>
+    </administrator-role>
+
+
 export JAVA_HOME=/opt/java/
 
-./server create wlpsvr1
+./server create wlp-cluster1
 
 
 To Join to the controller
- ./collective join wlpsvr1 \
+ ./collective join  wlp-cluster1 \
   --host=was-host1 \
   --port=9443 \
   --user=admin \
