@@ -1,0 +1,18 @@
+
+
+vi server.xml
+
+            <feature>jndi-1.0</feature>
+          <feature>jdbc-4.1</feature>
+
+          <library description="My shared library" id="MyLib" name="MyLib">
+                <file name="/opt/IBM/wlp-cluster1/usr/servers/wlp-cluster1/resources/mysql-connector-j-9.0.0.jar"/>
+        </library>
+
+
+         <dataSource id="defaultDS" jndiName="jdbc/worldDB" type="javax.sql.DataSource">
+        <connectionManager maxPoolSize="20" minPoolSize="5" connectionTimeout="10s" agedTimeout="30m"/>
+        <jdbcDriver libraryRef="MyLib"/>
+        <properties.db2.jcc databaseName="world" serverName="was-host1" portNumber="3306"/>
+        <containerAuthData user="root" password="password"></containerAuthData>
+    </dataSource>
